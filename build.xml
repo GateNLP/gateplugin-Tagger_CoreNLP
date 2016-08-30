@@ -1,10 +1,10 @@
-<project name="gateplugin-LearningFramework" basedir="."  default="build"  xmlns:ivy="antlib:org.apache.ivy.ant" >
+<project name="gateplugin-Tagger_CoreNLP" basedir="."  default="build"  xmlns:ivy="antlib:org.apache.ivy.ant" >
   <!-- Prevent Ant from warning about includeantruntime not being set -->
   <property name="build.sysclasspath" value="ignore" />
 
   <property file="build.properties" />
   <!-- Name of the plugin -->
-  <property name="plugin.name" value="LearningFramework"/>
+  <property name="plugin.name" value="Tagger_CoreNLP"/>
 
   <!-- Make environment variables available -->
   <property environment="env" />
@@ -70,9 +70,6 @@
       <include name="*.jar"/>
     </fileset>
     -->
-    <fileset dir="lib-static">
-      <include name="*.jar"/>
-    </fileset>
   </path>
  
   <path id="run.classpath">
@@ -95,21 +92,14 @@
      </javac>
   </target>
 
-  <!-- TODO: separate compile, classpath etc. for the whole testing stuff,
-       but at the moment, it is just part of everything else -->
-  
-  <!-- TODO: make testing use the separate testing jar etc. -->
   <target name="test" depends="jar">
     <junit fork="true">
       <classpath refid="run.classpath" />
       <formatter type="brief" usefile="false" />
       <formatter type="brief" usefile="true" />
       <formatter type="xml" />
-      <test name="gate.plugin.learningframework.tests.SuiteAllTests" />
+      <test name="gate.plugin.TODO" />
     </junit>
-    <delete file="info.yaml"/>
-    <delete file="lf.model"/>
-    <delete file="pipe.pipe"/>
   </target>
 
   <!-- Build JavaDoc documentation -->

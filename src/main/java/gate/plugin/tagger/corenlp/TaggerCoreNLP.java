@@ -175,11 +175,15 @@ public class TaggerCoreNLP extends AbstractDocumentProcessor {
     if(status != 200) {
       throw new GateRuntimeException("Response von server is NOK, status="+status+" msg="+response.getBody());
     }
-    //System.err.println("Got response, status is OK, data is: "+response.getBody());
+    String responseString = response.getBody();
+    // sometimes the server seems to return 0 codes in the string which the 
+    // jackson parser does not accept, so lets just remove them
+    //System.err.println("Got response, status is OK, data is: "+responseString);    
+    responseString = responseString.replaceAll("\0", "");
     Map responseMap = null;
     try {
       // Parse the json
-      responseMap = mapper.readValue(response.getBody(), HashMap.class);
+      responseMap = mapper.readValue(responseString, HashMap.class);
     } catch (IOException ex) {
       throw new GateRuntimeException("Could not read the response",ex);
     }
@@ -231,7 +235,7 @@ public class TaggerCoreNLP extends AbstractDocumentProcessor {
         // create the token annotation
         FeatureMap fm = Factory.newFeatureMap();
         if(pos!=null) fm.put("category", pos);
-        if(lemma!=null) fm.put("root",pos);
+        if(lemma!=null) fm.put("root",lemma);
         fm.put("index",index);
         if(ner!=null) fm.put("ner",ner);
         Utils.addAnn(outset, spanOffset+begin, spanOffset+end, "Token", fm);

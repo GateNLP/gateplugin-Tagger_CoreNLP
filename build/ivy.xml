@@ -1,0 +1,19 @@
+<ivy-module version="2.0">
+
+  <info
+    organisation="uk.ac.gate"
+    module="gate-plugin-tagger_corenlp"
+    revision="0.1-SNAPSHOT">
+    <description homepage="https://github.com/GateNLP/gateplugin-Tagger_CoreNLP/" />
+  </info>
+
+  <configurations>
+    <conf name="default" />
+  </configurations>
+
+  <dependencies defaultconf="*->master(default),runtime(default)" >
+    <dependency org="com.mashape.unirest" name="unirest-java" rev="1.4.9" />
+    <dependency org="com.fasterxml.jackson.core" name="jackson-databind" rev="2.6.3" />
+  </dependencies>
+</ivy-module>
+
